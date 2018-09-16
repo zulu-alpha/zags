@@ -1,0 +1,12 @@
+ -port=2302 
+ "-config=C:\games\arma3\main\TADST\main\TADST_config.cfg" 
+ "-cfg=C:\games\arma3\main\TADST\main\TADST_basic.cfg" 
+ "-profiles=C:\games\arma3\main\TADST\main" 
+ -name=main 
+ -filePatching 
+
+
+
+
+
+./arma3server -port=2302 -config=config.cfg -name=main -filePatching -mod=workshop/content/107410/463939057;workshop/content/107410/450814997;workshop/content/107410/497660133;workshop/content/107410/497661914;workshop/content/107410/583496184;workshop/content/107410/541888371;workshop/content/107410/751965892;workshop/content/107410/621650475;workshop/content/107410/549676314;workshop/content/107410/1183572428;workshop/content/107410/1446500688;workshop/content/107410/962935279;workshop/content/107410/520618345;workshop/content/107410/714598902;workshop/content/107410/810913902;workshop/content/107410/749790006;workshop/content/107410/893349825;workshop/content/107410/346665985;

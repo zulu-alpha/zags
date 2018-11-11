@@ -1,0 +1,4 @@
+{% for name, value in int_variables.items() -%}
+{{ name }} = {{ value }};
+{% endfor -%}
+{% if class_int_variable %}class sockets{maxPacketSize = {{class_int_variable.maxPacketSize}};};{% endif %}

@@ -1,0 +1,34 @@
+{% for name, value in string_variables.items() -%}
+{{ name }} = "{{ value }}";
+{% endfor -%}
+{% for name, value in bool_int_variables.items() -%}
+{{ name }} = {{ value }};
+{% endfor -%}
+{% for name, array in string_array_variables.items() -%}
+{{ name }}[]= {
+    {%- for element in array %}
+    "{{ element }}"{% if not loop.last %},{% endif %}
+    {%- endfor %}
+};
+{% endfor -%}
+{% for name, array in number_bool_array_variables.items() -%}
+{{ name }}[]= {
+    {%- for element in array %}
+    {{ element }}{% if not loop.last %},{% endif %}
+    {%- endfor %}
+};
+{% endfor -%}
+{% if mission_rotation_variables %}
+class Missions
+{
+
+	{% for classname in mission_rotation_variables.mission_classnames -%}
+	class {{ classname }}
+	{
+		template = {{ mission_rotation_variables.mission_names[loop.index0] }};
+		difficulty = "{{ mission_rotation_variables.mission_difficulties[loop.index0] }}";
+		class Params { {% if 'mission_parameters' in mission_rotation_variables %}{{ mission_rotation_variables.mission_parameters[loop.index0] }}{% endif %} };
+	};
+	{% endfor %}
+};
+{% endif %}

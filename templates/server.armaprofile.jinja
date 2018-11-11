@@ -1,0 +1,21 @@
+class DifficultyPresets
+{
+    class CustomDifficulty
+    {
+        class Options
+        {
+            {% for name, value in option_variables.items() -%}
+            {{ name }} = {{ value }};
+            {% endfor -%}
+        };
+    {% if custom_difficulty_variables %}aiLevelPreset = {{ custom_difficulty_variables.aiLevelPreset }};{% endif %}
+    };
+{% if custom_ai_level_variables %}}
+    class CustomAILevel
+    {
+        {% for name, value in custom_ai_level_variables.items() -%}
+        {{ name }} = {{ value }};
+        {% endfor -%}
+    };
+{% endif %}
+};

@@ -58,7 +58,7 @@ These are each arrays and the nth element of each array represents the nth missi
 * CONFIG_MISSION_ROTATION_PARAMS
 ### For example
 * `CONFIG_MISSION_ROTATION_CLASSNAMES=Mission1:Mission2`
-* `CONFIG_MISSION_ROTATION_NAMES=co@12_opsalamander_v1-2-0.Tanoa.pbo:zat_selection_v2-1-0.Malden.pbo`
+* `CONFIG_MISSION_ROTATION_NAMES=co@12_opsalamander_v1-2-0.Tanoa:zat_selection_v2-1-0.Malden`
 * `CONFIG_MISSION_ROTATION_DIFFICULTIES=Custom:veteran`
 * `CONFIG_MISSION_ROTATION_PARAMS=someparam:otherparam`
 
@@ -69,19 +69,20 @@ class Missions
 
 	class Mission1
 	{
-		template = co@12_opsalamander_v1-2-0.Tanoa.pbo;
+		template = co@12_opsalamander_v1-2-0.Tanoa;
 		difficulty = "Custom";
 		class Params { someparam };
 	};
 	class Mission2
 	{
-		template = zat_selection_v2-1-0.Malden.pbo;
+		template = zat_selection_v2-1-0.Malden;
 		difficulty = "veteran";
 		class Params { otherparam };
 	};
 	
 };
 ```
+Note that the `.pbo` is not included for the mission files (`template`)
 
 # basic.cfg environmental variables
 The following environmental variables map onto their associated parameter names, which can be referenced in the official [basic.cfg documentation](https://community.bistudio.com/wiki/basic.cfg):

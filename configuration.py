@@ -96,9 +96,9 @@ def render_server_cfg(path_config):
         error = f'{mission_parameters - provided_mission_parameters} mission rotation parameters are still needed!'
         assert parameter_intersection == mission_parameters, error
 
-    with open(path_config, 'w') as f:
+    with open(path_config, 'w') as open_file:
         rendered = template_cfg.render(**parameters)
-        f.write(rendered)
+        open_file.write(rendered)
 
 
 def render_basic_cfg(path_basic):
@@ -122,15 +122,15 @@ def render_basic_cfg(path_basic):
             'BASIC_MAX_PACKET_SIZE': 'maxPacketSize'
         }
     }
-    
+
     parameters = {}
 
     for parameter_type in ('int_variables', 'class_int_variable'):
         parameters[parameter_type] = load_singular_variables(global_variable_map[parameter_type])
 
-    with open(path_basic, 'w') as f:
+    with open(path_basic, 'w') as open_file:
         rendered = template_cfg.render(**parameters)
-        f.write(rendered)
+        open_file.write(rendered)
 
 def render_armaprofile(path_profile):
     """Render basic.cfg
@@ -176,6 +176,6 @@ def render_armaprofile(path_profile):
     for parameter_type in ('option_variables', 'custom_difficulty_variables', 'custom_ai_level_variables'):
         parameters[parameter_type] = load_singular_variables(global_variable_map[parameter_type])
 
-    with open(path_profile, 'w') as f:
+    with open(path_profile, 'w') as open_file:
         rendered = template_cfg.render(**parameters)
-        f.write(rendered)
+        open_file.write(rendered)

@@ -48,6 +48,7 @@ The following environmental variables map onto their associated parameter names,
 * CONFIG_ON_UNSIGNED_DATA: `onUnsignedData`
 * CONFIG_REGULAR_CHECK: `regularCheck`
 * CONFIG_BATTLEYE: `BattlEye`
+* CONFIG_BATTLEYE_LICENSE: `battleyeLicense`
 * CONFIG_TIME_STAMP_FORMAT: `timeStampFormat`
 * CONFIG_FORCE_ROTORLIB_SIMULATION: `forceRotorLibSimulation`
 * CONFIG_PERSISTENT: `persistent`

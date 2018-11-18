@@ -40,6 +40,7 @@ CONFIG_BOOL_INT_VARIABLES = {
     'CONFIG_VON_CODEC_QUALITY': 'vonCodecQuality',
     'CONFIG_VON_CODEC': 'vonCodec',
     'CONFIG_BATTLEYE': 'BattlEye',
+    'CONFIG_BATTLEYE_LICENSE': 'battleyeLicense',
     'CONFIG_FORCE_ROTORLIB_SIMULATION': 'forceRotorLibSimulation',
     'CONFIG_PERSISTENT': 'persistent',
     'CONFIG_REQUIRED_BUILD': 'requiredBuild'

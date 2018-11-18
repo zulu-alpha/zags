@@ -53,7 +53,7 @@ def render_server_cfg(path_config):
             'CONFIG_DISABLE_VON': 'disableVoN',
             'CONFIG_VON_CODEC_QUALITY': 'vonCodecQuality',
             'CONFIG_VON_CODEC': 'vonCodec',
-            'CONFIG_BATTLEEYE': 'BattlEye',
+            'CONFIG_BATTLEYE': 'BattlEye',
             'CONFIG_FORCE_ROTORLIB_SIMULATION': 'forceRotorLibSimulation',
             'CONFIG_PERSISTENT': 'persistent',
             'CONFIG_REQUIRED_BUILD': 'requiredBuild'

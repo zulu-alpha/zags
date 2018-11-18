@@ -6,6 +6,9 @@ from urllib.parse import urlparse, parse_qs
 import requests
 
 
+def get_mods
+
+
 def launch(executable_path, mods_path, mods_manifest_url, mod_line, arguments, kw_arguments):
 
     run_params = [executable_path]

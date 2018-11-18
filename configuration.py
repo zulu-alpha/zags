@@ -100,7 +100,6 @@ def render_server_cfg(path_config):
         rendered = template_cfg.render(**parameters)
         open_file.write(rendered)
 
-
 def render_basic_cfg(path_basic):
     """Render basic.cfg
     https://community.bistudio.com/wiki/basic.cfg

@@ -3,9 +3,9 @@ from pathlib import Path
 import pytest
 
 
-PATH_CONFIG = 'test_temp_server.cfg'
-PATH_BASIC = 'test_temp_basic.cfg'
-PATH_PROFILE = 'test_temp_server.armaprofile'
+PATH_CONFIG = 'server.cfg'
+PATH_BASIC = 'basic.cfg'
+PATH_PROFILE = 'server.armaprofile'
 
 CONFIG_STRING_VARIABLES = {
     'CONFIG_PASSWORD_ADMIN': 'passwordAdmin',
@@ -98,18 +98,7 @@ PROFILES_CUSTOM_AI_LEVEL = {
     'PROFILE_CUSTOM_AI_LEVEL_PRECISION_AI': 'precisionAI'
 }
 
-@pytest.fixture
-def clean_files():
-    """Setup and teardown for temporary config files."""
-    def delete(files):
-        for file_name in files:
-            if Path(file_name).is_file():
-                os.remove(file_name)
-    delete((PATH_CONFIG, PATH_BASIC, PATH_PROFILE))
-    yield
-    delete((PATH_CONFIG, PATH_BASIC, PATH_PROFILE))
-
-def test_config_single_variables(clean_files):
+def test_config_single_variables(tmp_path):
     """Tests that each single (non array) variable is written correctly to the config file"""
     from configuration import render_server_cfg
 
@@ -118,9 +107,9 @@ def test_config_single_variables(clean_files):
     for global_var in global_variables:
         os.environ[global_var] = test_value
 
-    render_server_cfg(PATH_CONFIG)
+    render_server_cfg(tmp_path / PATH_CONFIG)
 
-    with open(PATH_CONFIG, 'r') as f:
+    with open(tmp_path / PATH_CONFIG, 'r') as f:
         text = f.read()
         for variable in global_variables.values():
             error = f'{variable} not defined correctly!'
@@ -129,7 +118,7 @@ def test_config_single_variables(clean_files):
             elif variable in CONFIG_BOOL_INT_VARIABLES.values():
                 assert f'{variable} = {test_value};' in text, error
 
-def test_basic_single_variables(clean_files):
+def test_basic_single_variables(tmp_path):
     """Tests that each variable is written correctly to the basic file"""
     from configuration import render_basic_cfg
 
@@ -138,14 +127,14 @@ def test_basic_single_variables(clean_files):
     for global_var in global_variables:
         os.environ[global_var] = test_value
 
-    render_basic_cfg(PATH_BASIC)
+    render_basic_cfg(tmp_path / PATH_BASIC)
 
-    with open(PATH_BASIC, 'r') as f:
+    with open(tmp_path / PATH_BASIC, 'r') as f:
         text = f.read()
         for variable in global_variables.values():
             assert f'{variable} = {test_value};' in text, f'{variable} not defined correctly!'
 
-def test_profile_option_variables(clean_files):
+def test_profile_option_variables(tmp_path):
     """Tests that each variable for the Options class is written correctly to the profile file"""
     from configuration import render_armaprofile
 
@@ -154,14 +143,14 @@ def test_profile_option_variables(clean_files):
     for global_var in global_variables:
         os.environ[global_var] = test_value
 
-    render_armaprofile(PATH_PROFILE)
+    render_armaprofile(tmp_path / PATH_PROFILE)
 
-    with open(PATH_PROFILE, 'r') as f:
+    with open(tmp_path / PATH_PROFILE, 'r') as f:
         text = f.read()
         for variable in global_variables.values():
             assert f'{variable} = {test_value};' in text, f'{variable} not defined correctly!'
 
-def test_profile_custom_difficulty(clean_files):
+def test_profile_custom_difficulty(tmp_path):
     """Tests that the variable in the CustomDifficulty class in the profile file is written correctly."""
     from configuration import render_armaprofile
 
@@ -169,14 +158,14 @@ def test_profile_custom_difficulty(clean_files):
     os.environ['PROFILE_AI_LEVEL_PRESET'] = test_value
     variable = PROFILE_VARIABLES['PROFILE_AI_LEVEL_PRESET']
 
-    render_armaprofile(PATH_PROFILE)
+    render_armaprofile(tmp_path / PATH_PROFILE)
 
-    with open(PATH_PROFILE, 'r') as f:
+    with open(tmp_path / PATH_PROFILE, 'r') as f:
         text = f.read()
         test_text = '};\n    %s = %s;\n    };' % (variable, test_value)
         assert test_text in text, f'{variable} not defined correctly!'
 
-def test_profile_custom_ai_level(clean_files):
+def test_profile_custom_ai_level(tmp_path):
     """Tests that the variables in the CustomAILevel class in the profile file is written correctly."""
     from configuration import render_armaprofile
 
@@ -186,14 +175,14 @@ def test_profile_custom_ai_level(clean_files):
     os.environ['PROFILE_CUSTOM_AI_LEVEL_PRECISION_AI'] = test_value
     variable2 = PROFILES_CUSTOM_AI_LEVEL['PROFILE_CUSTOM_AI_LEVEL_PRECISION_AI']
 
-    render_armaprofile(PATH_PROFILE)
+    render_armaprofile(tmp_path / PATH_PROFILE)
 
-    with open(PATH_PROFILE, 'r') as f:
+    with open(tmp_path / PATH_PROFILE, 'r') as f:
         text = f.read()
         test_text = 'class CustomAILevel\n    {\n        %s = %s;\n        %s = %s;\n        };' % (variable1, test_value, variable2, test_value)
         assert test_text in text, 'CustomAILevel is not defined correctly!'
 
-def test_basic_class_sockets(clean_files):
+def test_basic_class_sockets(tmp_path):
     """Tests that the sockets class variable is written correctly to the basic file"""
     from configuration import render_basic_cfg
 
@@ -201,14 +190,14 @@ def test_basic_class_sockets(clean_files):
     os.environ['BASIC_MAX_PACKET_SIZE'] = test_value
     variable = BASIC_CLASS_INT_VARIABLES['BASIC_MAX_PACKET_SIZE']
 
-    render_basic_cfg(PATH_BASIC)
+    render_basic_cfg(tmp_path / PATH_BASIC)
 
-    with open(PATH_BASIC, 'r') as f:
+    with open(tmp_path / PATH_BASIC, 'r') as f:
         text = f.read()
         test_text = 'class sockets{%s = %s;};' % (variable, test_value)
         assert test_text in text, f'{variable} not defined correctly!'
 
-def test_config_arrays(clean_files):
+def test_config_arrays(tmp_path):
     """Tests if string or number arrays are created correctly to the config file"""
     from configuration import render_server_cfg
 
@@ -221,35 +210,35 @@ def test_config_arrays(clean_files):
     for variable in global_variables.values():
         # One line
         assign_globals('123')
-        render_server_cfg(PATH_CONFIG)
+        render_server_cfg(tmp_path / PATH_CONFIG)
         if variable in CONFIG_STRING_ARRAY_VARIABLES.values():
             array = '%s[]= {\n    "123"\n}' % variable
         elif variable in CONFIG_NUMBER_OR_BOOL_ARRAY_VARIABLES.values():
             array = '%s[]= {\n    123\n}' % variable
-        with open(PATH_CONFIG, 'r') as f:
+        with open(tmp_path / PATH_CONFIG, 'r') as f:
             assert array in f.read(), 'Array text does not match!'
 
         # Multi line
         assign_globals('123:456:789')
-        render_server_cfg(PATH_CONFIG)
+        render_server_cfg(tmp_path / PATH_CONFIG)
         if variable in CONFIG_STRING_ARRAY_VARIABLES.values():
             array = '%s[]= {\n    "123",\n    "456",\n    "789"\n};' % variable
         elif variable in CONFIG_NUMBER_OR_BOOL_ARRAY_VARIABLES.values():
             array = '%s[]= {\n    123,\n    456,\n    789\n};' % variable
-        with open(PATH_CONFIG, 'r') as f:
+        with open(tmp_path / PATH_CONFIG, 'r') as f:
             assert array in f.read(), 'Array text does not match!'
 
         # Multi line with blank lines
         assign_globals(':123:456::789:')
-        render_server_cfg(PATH_CONFIG)
+        render_server_cfg(tmp_path / PATH_CONFIG)
         if variable in CONFIG_STRING_ARRAY_VARIABLES.values():
             array = '%s[]= {\n    "",\n    "123",\n    "456",\n    "",\n    "789",\n    ""\n};' % variable
         elif variable in CONFIG_NUMBER_OR_BOOL_ARRAY_VARIABLES.values():
             array = '%s[]= {\n    ,\n    123,\n    456,\n    ,\n    789,\n    \n};' % variable  # TODO: Make better handling of None elements
-        with open(PATH_CONFIG, 'r') as f:
+        with open(tmp_path / PATH_CONFIG, 'r') as f:
             assert array in f.read(), 'Array text does not match!'
 
-def test_config_not_defined(clean_files):
+def test_config_not_defined(tmp_path):
     """Tests that each string variable is not written if not defined"""
     from configuration import render_server_cfg, render_basic_cfg, render_armaprofile
 
@@ -277,14 +266,14 @@ def test_config_not_defined(clean_files):
         if global_var in os.environ:
             del os.environ[global_var]
 
-    render_server_cfg(PATH_CONFIG)
-    render_basic_cfg(PATH_BASIC)
-    render_armaprofile(PATH_PROFILE)
+    render_server_cfg(tmp_path / PATH_CONFIG)
+    render_basic_cfg(tmp_path / PATH_BASIC)
+    render_armaprofile(tmp_path / PATH_PROFILE)
 
-    for file_name in (PATH_CONFIG, PATH_BASIC, PATH_PROFILE):
+    for file_name in (tmp_path / PATH_CONFIG, tmp_path / PATH_BASIC, tmp_path / PATH_PROFILE):
         check_file(file_name, all_global_variables.values(), 'test_var')
 
-def test_mission(clean_files):
+def test_mission(tmp_path):
     """Test that the mission rotation mission is added correctly"""
     from configuration import render_server_cfg
 
@@ -293,27 +282,27 @@ def test_mission(clean_files):
     os.environ['CONFIG_MISSION_ROTATION_DIFFICULTIES'] = 'Custom'
     if 'CONFIG_MISSION_ROTATION_PARAMS' in os.environ:
         del os.environ['CONFIG_MISSION_ROTATION_PARAMS']
-    render_server_cfg(PATH_CONFIG)
+    render_server_cfg(tmp_path / PATH_CONFIG)
     correct_text = 'class Missions\n{\n\n\tclass Mission1\n\t{\n\t\ttemplate = co@12_opsalamander_v1-2-0.Tanoa.pbo;\n\t\tdifficulty = "Custom";\n\t\tclass Params {  };\n\t};\n\t\n};'
-    with open(PATH_CONFIG, 'r') as f:
+    with open(tmp_path / PATH_CONFIG, 'r') as f:
         assert correct_text in f.read(), 'Text does not match!'
 
     os.environ['CONFIG_MISSION_ROTATION_CLASSNAMES'] = 'Mission1:Mission2'
     os.environ['CONFIG_MISSION_ROTATION_NAMES'] = 'co@12_opsalamander_v1-2-0.Tanoa.pbo:zat_selection_v2-1-0.Malden.pbo'
     os.environ['CONFIG_MISSION_ROTATION_DIFFICULTIES'] = 'Custom:veteran'
     os.environ['CONFIG_MISSION_ROTATION_PARAMS'] = 'someparam:otherparam'
-    render_server_cfg(PATH_CONFIG)
+    render_server_cfg(tmp_path / PATH_CONFIG)
     correct_text = 'class Missions\n{\n\n\tclass Mission1\n\t{\n\t\ttemplate = co@12_opsalamander_v1-2-0.Tanoa.pbo;\n\t\tdifficulty = "Custom";\n\t\tclass Params { someparam };\n\t};\n\tclass Mission2\n\t{\n\t\ttemplate = zat_selection_v2-1-0.Malden.pbo;\n\t\tdifficulty = "veteran";\n\t\tclass Params { otherparam };\n\t};\n\t\n};'
-    with open(PATH_CONFIG, 'r') as f:
+    with open(tmp_path / PATH_CONFIG, 'r') as f:
         assert correct_text in f.read(), 'Text does not match!'
 
     os.environ['CONFIG_MISSION_ROTATION_CLASSNAMES'] = 'Mission1'
     os.environ['CONFIG_MISSION_ROTATION_NAMES'] = 'co@12_opsalamander_v1-2-0.Tanoa.pbo'
     del os.environ['CONFIG_MISSION_ROTATION_DIFFICULTIES']
     with pytest.raises(AssertionError):
-        render_server_cfg(PATH_CONFIG)
+        render_server_cfg(tmp_path / PATH_CONFIG)
 
     del os.environ['CONFIG_MISSION_ROTATION_CLASSNAMES']
     os.environ['CONFIG_MISSION_ROTATION_DIFFICULTIES'] = 'Custom'
     with pytest.raises(AssertionError):
-        render_server_cfg(PATH_CONFIG)
+        render_server_cfg(tmp_path / PATH_CONFIG)

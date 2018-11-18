@@ -1,3 +1,8 @@
+# Environment configuration
+These environmental variables are not used to generate config files, but instead other aspects of the server, such as mods.
+* MODS_MANIFEST_URL: Url to a json file of a format like this: https://github.com/zulu-alpha/mod-lines/blob/master/mods_manifest.json.
+* MODS_MANIFEST_MODLINE: A string describing which set of mods to use, as described in the above json file.
+
 # Configuration file basics
 server.cfg, basic.cfg and the server.armaprofile has it's values generated based on global variables available to this container on first start.
 If a global variable is not defined then that variable will not be defined at all in the settings file.
@@ -122,8 +127,3 @@ The following environmental variables map onto their associated parameter names,
 * PROFILE_AI_LEVEL_PRESET: `aiLevelPreset`
 * PROFILE_CUSTOM_AI_LEVEL_SKILL_AI: `skillAI`
 * PROFILE_CUSTOM_AI_LEVEL_PRECISION_AI: `precisionAI`
-
-# Other environmental variables
-These environmental variables are not used to generate config files, but instead other aspects of the server, such as mods.
-* MODS_MANIFEST_URL: Url to a json file of a format like this: https://github.com/zulu-alpha/mod-lines/blob/master/mods_manifest.json.
-* MODS_MANIFEST_MODLINE: A string describing which set of mods to use, as described in the above json file.

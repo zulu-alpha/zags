@@ -1,7 +1,13 @@
 # Environment configuration
 These environmental variables are not used to generate config files, but instead other aspects of the server, such as mods.
-* MODS_MANIFEST_URL: Url to a json file of a format like this: https://github.com/zulu-alpha/mod-lines/blob/master/mods_manifest.json.
-* MODS_MANIFEST_MODLINE: A string describing which set of mods to use, as described in the above json file.
+* MODLINE: A string describing which set of mods to use, as described in .
+* MODS_STORAGE_ACCOUNT_NAME: Azure storage account name for mods and keys. Ideally it should be in the same Azure region as this container is running in
+* MODS_STORAGE_ACCOUNT_KEY: Key for the given Azure storage account name.
+* MISSIONS_STORAGE_ACCOUNT_NAME: Azure storage account name for missions. Ideally it should be in the same Azure region as this container is running in
+* MISSIONS_STORAGE_ACCOUNT_KEY: Key for the given Azure storage account name.
+* MODS_SHARE_NAME: Name of the Azure shared directory that the mods will be in.
+* KEYS_SHARE_NAME: Name of the Azure shared directory that mod's keys will be in.
+* MISSIONS_SHARE_NAME: Name of the Azure shared directory that missions will be in.
 
 # Configuration file basics
 server.cfg, basic.cfg and the server.armaprofile has it's values generated based on global variables available to this container on first start.
@@ -89,6 +95,7 @@ class Missions
 };
 ```
 Note that the `.pbo` is not included for the mission files (`template`)
+Also note that if one mission rotation variable is provided, then you need to provide them all, except for `CONFIG_MISSION_ROTATION_PARAMS`, which is still optional
 
 # basic.cfg environmental variables
 The following environmental variables map onto their associated parameter names, which can be referenced in the official [basic.cfg documentation](https://community.bistudio.com/wiki/basic.cfg):
@@ -117,7 +124,7 @@ The following environmental variables map onto their associated parameter names,
 * PROFILE_STAMINA_BAR: `staminaBar`
 * PROFILE_WEAPON_CROSSHAIR: `weaponCrosshair`
 * PROFILE_VISION_AID: `visionAid`
-* PROFILE_THIRD_PERSON_AID: `thirdPersonView`
+* PROFILE_THIRD_PERSON_VIEW: `thirdPersonView`
 * PROFILE_CAMERA_SHAKE: `cameraShake`
 * PROFILE_SCORE_TABLE: `scoreTable`
 * PROFILE_DEATH_MESSAGE: `deathMessages`

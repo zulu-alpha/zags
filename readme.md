@@ -3,6 +3,17 @@
 An ephemeral, short lived Arma 3 server that can be quickly run anywhere in the world with mods and easy configuration via environmental variables.
 Designed to work with Azure, due it's widest region availability and SMB file servers and windows container support as a backup.
 
+## Ports
+
+The following ports need to be open:
+
+* 445/tcp
+* 2302/udp
+* 2303/udp
+* 2304/udp
+* 2305/udp
+* 2306/udp
+
 ## Environment configuration
 
 These environmental variables are not used to generate config files, but instead other aspects of the server, such as mods.

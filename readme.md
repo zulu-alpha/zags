@@ -1,6 +1,6 @@
 # Zulu-Alpha Game Server
 
-An ephemeral, short lived server that can be quickly run anywhere in the world with mods and easy configuration via environmental variables.
+An ephemeral, short lived Arma 3 server that can be quickly run anywhere in the world with mods and easy configuration via environmental variables.
 Designed to work with Azure, due it's widest region availability and SMB file servers and windows container support as a backup.
 
 ## Environment configuration
@@ -80,10 +80,10 @@ The following environmental variables map onto their associated parameter names,
 The following environmental variables are different, in that they define the mission rotation class in the `server.cfg`.
 These are each arrays and the nth element of each array represents the nth mission defined in the `server.cfg` file:
 
-* **CONFIG_MISSION_ROTATION_CLASSNAMES
-* **CONFIG_MISSION_ROTATION_NAMES
-* **CONFIG_MISSION_ROTATION_DIFFICULTIES
-* **CONFIG_MISSION_ROTATION_PARAMS
+* **CONFIG_MISSION_ROTATION_CLASSNAMES**
+* **CONFIG_MISSION_ROTATION_NAMES**
+* **CONFIG_MISSION_ROTATION_DIFFICULTIES**
+* **CONFIG_MISSION_ROTATION_PARAMS**
 
 #### For example
 

@@ -13,22 +13,35 @@ WORKDIR steamcmd
 RUN wget -qO- "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - && \
     ./steamcmd.sh +login $STEAM_USERNAME $STEAM_PASSWORD +force_install_dir /arma3 +app_update "233780" validate +exit
 
+WORKDIR /arma3
+RUN wget https://bootstrap.pypa.io/get-pip.py
+
 FROM ubuntu:xenial
 COPY --from=build /arma3 /arma3
 
-RUN add-apt-repository -y ppa:deadsnakes/ppa && \
+WORKDIR /arma3
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository -y ppa:deadsnakes/ppa && \
     apt-get update && \
     apt-get install -y cifs-utils && \
     apt-get install -y lib32stdc++6 && \
     apt-get install -y python3.7 python3.7-dev libncurses5-dev && \
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python3.7 get-pip.py
+    python3.7 get-pip.py && \
+    rm get-pip.py
 
-WORKDIR /arma3
-COPY . /arma3
+COPY app/. /arma3
 
-RUN python3 -m pip install pipenv
-RUN pipenv install --ignore-pipfile
+RUN pip3 install pipenv && \
+    pipenv install --ignore-pipfile
+
+# Clean folders that will be synced and used for config
+RUN rm -R keys && \
+    rm -R mpmissions && \
+    mkdir keys && \
+    mkdir mods && \
+    mkdir mpmissions && \
+    mkdir server
 
 EXPOSE 445/tcp
 EXPOSE 2302/udp
@@ -37,7 +50,4 @@ EXPOSE 2304/udp
 EXPOSE 2305/udp
 EXPOSE 2306/udp
 
-RUN ls
-
-ENTRYPOINT ["pipenv", "run", "python3", "-m", "launch.py", "./arma3server"]
-CMD ["-port", "2302"]
+ENTRYPOINT ["pipenv", "run", "python3", "run.py"]

@@ -153,7 +153,7 @@ def render_armaprofile(path_profile):
             'PROFILE_STAMINA_BAR': 'staminaBar',
             'PROFILE_WEAPON_CROSSHAIR': 'weaponCrosshair',
             'PROFILE_VISION_AID': 'visionAid',
-            'PROFILE_THIRD_PERSON_AID': 'thirdPersonView',
+            'PROFILE_THIRD_PERSON_VIEW': 'thirdPersonView',
             'PROFILE_CAMERA_SHAKE': 'cameraShake',
             'PROFILE_SCORE_TABLE': 'scoreTable',
             'PROFILE_DEATH_MESSAGE': 'deathMessages',

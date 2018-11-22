@@ -3,7 +3,7 @@ import os
 from jinja2 import Environment, FileSystemLoader
 
 
-ENV = Environment(loader=FileSystemLoader('templates'))
+ENV = Environment(loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')))
 
 def load_singular_variables(global_map):
     """Load the values from the global variables specified in the global_map

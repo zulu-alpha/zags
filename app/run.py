@@ -14,35 +14,6 @@ PATH_SERVER_CFG = '/arma3/server.cfg'
 PATH_BASIC_CFG = '/arma3/basic.cfg'
 PATH_PROFILE = '/arma3/server/server.armaprofile'
 
-def setup_file_shares():
-    """Setup Azure file shares"""
-    mods_storage_account_name = os.environ['MODS_STORAGE_ACCOUNT_NAME']
-    mods_storage_account_key = os.environ['MODS_STORAGE_ACCOUNT_KEY']
-    missions_storage_account_name = os.environ['MISSIONS_STORAGE_ACCOUNT_NAME']
-    missions_storage_account_key = os.environ['MISSIONS_STORAGE_ACCOUNT_KEY']
-    mods_share_name = os.environ['MODS_SHARE_NAME']
-    keys_share_name = os.environ['KEYS_SHARE_NAME']
-    missions_share_name = os.environ['MISSIONS_SHARE_NAME']
-    smb_version = '3.0'
-    # Mount mods
-    run([
-        'mount', '-t', 'cifs', f'//{mods_storage_account_name}.file.core.windows.net/{mods_share_name}',
-        PATH_MODS, '-o',
-        f'vers={smb_version},username={mods_storage_account_name},password={mods_storage_account_key},dir_mode=0755,file_mode=0755,serverino'
-    ])
-    # Mount keys
-    run([
-        'mount', '-t', 'cifs', f'//{mods_storage_account_name}.file.core.windows.net/{keys_share_name}',
-        PATH_KEYS, '-o',
-        f'vers={smb_version},username={mods_storage_account_name},password={mods_storage_account_key},dir_mode=0755,file_mode=0755,serverino'
-    ])
-    # Mount missions
-    run([
-        'mount', '-t', 'cifs', f'//{missions_storage_account_name}.file.core.windows.net/{missions_share_name}',
-        PATH_MISSIONS, '-o',
-        f'vers={smb_version},username={missions_storage_account_name},password={missions_storage_account_key},dir_mode=0755,file_mode=0755,serverino'
-    ])
-
 def launch(executable_path, mods_path, mod_line, arguments, kw_arguments):
     """Run the Arma3 Server executable"""
     run_params = [executable_path]
@@ -59,7 +30,6 @@ def launch(executable_path, mods_path, mod_line, arguments, kw_arguments):
     run(run_params)
 
 if __name__ == '__main__':
-    setup_file_shares()
     render_server_cfg(PATH_SERVER_CFG)
     render_basic_cfg(PATH_BASIC_CFG)
     render_armaprofile(PATH_PROFILE)

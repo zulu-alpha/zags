@@ -1,4 +1,4 @@
-FROM ubuntu:xenial as build
+FROM ubuntu:bionic as build
 
 LABEL maintainer="adam@piskorski.me"
 
@@ -40,7 +40,7 @@ RUN rm -R keys && \
     mkdir keys && \
     mkdir mods && \
     mkdir mpmissions && \
-    mkdir server
+    mkdir -p "/root/.local/share/Arma 3 - Other Profiles/server"
 
 EXPOSE 2302/udp
 EXPOSE 2303/udp

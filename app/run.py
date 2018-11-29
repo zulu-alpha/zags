@@ -12,7 +12,7 @@ PATH_MISSIONS = '/arma3/mpmissions'
 PATH_MODLINES = str(Path(PATH_MODS) / 'modlines.json')
 PATH_SERVER_CFG = '/arma3/server.cfg'
 PATH_BASIC_CFG = '/arma3/basic.cfg'
-PATH_PROFILE = '/arma3/server/server.armaprofile'
+PATH_PROFILE = '/root/.local/share/Arma 3 - Other Profiles/server/server.Arma3Profile'
 
 def launch(executable_path, mods_path, mod_line, arguments, kw_arguments):
     """Run the Arma3 Server executable"""

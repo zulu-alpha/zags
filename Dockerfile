@@ -11,7 +11,7 @@ RUN apt-get update &&  \
 
 WORKDIR steamcmd
 RUN wget -qO- "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf - && \
-    ./steamcmd.sh +login $STEAM_USERNAME $STEAM_PASSWORD +force_install_dir /arma3 +app_update "233780" validate +exit
+    ./steamcmd.sh "+login $STEAM_USERNAME $STEAM_PASSWORD" +force_install_dir /arma3 "+app_update "233780" validate" +exit
 
 WORKDIR /arma3
 RUN wget https://bootstrap.pypa.io/get-pip.py
@@ -24,7 +24,6 @@ RUN apt-get update && \
     apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:deadsnakes/ppa && \
     apt-get update && \
-    apt-get install -y cifs-utils && \
     apt-get install -y lib32stdc++6 && \
     apt-get install -y python3.7 python3.7-dev libncurses5-dev && \
     python3.7 get-pip.py && \
@@ -43,7 +42,6 @@ RUN rm -R keys && \
     mkdir mpmissions && \
     mkdir server
 
-EXPOSE 445/tcp
 EXPOSE 2302/udp
 EXPOSE 2303/udp
 EXPOSE 2304/udp

@@ -1,0 +1,16 @@
+sudo: enabled
+services:
+  - docker
+language: python
+python:
+  - "3.7"
+install:
+  - pip install pipenv
+  - pipenv install --dev
+script:
+  - pipenv run python pytest
+deploy:
+  provider: script
+  script: python scripts/docker_push.py
+  on:
+    branch: master

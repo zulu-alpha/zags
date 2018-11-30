@@ -6,7 +6,8 @@ python:
   - "3.7-dev"
 install:
   - pip install pipenv
-  - pipenv install --dev
+  - export PIPENV_IGNORE_VIRTUALENVS=1
+  - pipenv install --dev --ignore-pipfile
 script:
   - pipenv run python pytest
 deploy:

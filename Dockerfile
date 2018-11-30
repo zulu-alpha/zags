@@ -16,7 +16,7 @@ RUN wget -qO- "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.t
 WORKDIR /arma3
 RUN wget https://bootstrap.pypa.io/get-pip.py
 
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 COPY --from=build /arma3 /arma3
 
 WORKDIR /arma3

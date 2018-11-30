@@ -8,9 +8,12 @@ addons:
       - deadsnakes
     packages:
       - python3.7
-install:
-  - pip3 install pipenv
-  - pipenv install --dev --ignore-pipfile
+before_install:
+  - curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  - python3.7 get-pip.py
+  - rm get-pip.py
+  - pip install pipenv
+install: pipenv install --dev --ignore-pipfile
 script:
   - pipenv run python pytest
 deploy:

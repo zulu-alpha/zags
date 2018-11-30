@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 "jinja2" = "*"
 requests = "*"
-python-dotenv = "*"
 
 [dev-packages]
 pylint = "*"

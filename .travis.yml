@@ -1,4 +1,4 @@
-sudo: enabled
+sudo: generic
 services:
   - docker
 language: python
@@ -6,7 +6,6 @@ python:
   - "3.7-dev"
 install:
   - pip install pipenv
-  - export PIPENV_IGNORE_VIRTUALENVS=1
   - pipenv install --dev --ignore-pipfile
 script:
   - pipenv run python pytest

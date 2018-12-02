@@ -6,15 +6,13 @@ from pathlib import Path
 from configuration import render_server_cfg, render_basic_cfg, render_armaprofile
 
 
-PATH_MODS = '/arma3/mods'
-PATH_KEYS = '/arma3/keys'
-PATH_MISSIONS = '/arma3/mpmissions'
-PATH_MODLINES = str(Path(PATH_MODS) / 'modlines.json')
+PATH_MODS = 'mods'
+PATH_MODLINES = '/arma3/mods/modlines.json'
 PATH_SERVER_CFG = '/arma3/server.cfg'
 PATH_BASIC_CFG = '/arma3/basic.cfg'
 PATH_PROFILE = '/root/.local/share/Arma 3 - Other Profiles/server/server.Arma3Profile'
 
-def launch(executable_path, mods_path, mod_line, arguments, kw_arguments):
+def launch(executable_path, mod_line, arguments, kw_arguments):
     """Run the Arma3 Server executable"""
     run_params = [executable_path]
     for param in arguments:
@@ -25,7 +23,7 @@ def launch(executable_path, mods_path, mod_line, arguments, kw_arguments):
         modlines = json.loads(open_file.read())
     print(f'Using mod line {mod_line}: {modlines[mod_line]}')
     for mod_dir in modlines[mod_line]:
-        run_params.append(f'-mod={str(Path(mods_path) / mod_dir)}')
+        run_params.append(f'-mod={str(Path(PATH_MODS) / mod_dir)}')
     print(f'Launching with params {run_params}')
     run(run_params)
 
@@ -35,7 +33,6 @@ if __name__ == '__main__':
     render_armaprofile(PATH_PROFILE)
     launch(
         executable_path='/arma3/arma3server',
-        mods_path='mods',
         mod_line=os.environ['MODLINE'],
         arguments=('filePatching',),
         kw_arguments={

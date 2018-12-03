@@ -1,0 +1,35 @@
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: tests
+    image: python:3.7
+    commands:
+      - pip install pipenv
+      - pipenv install --dev --ignore-pipfile
+      - pipenv run pytest
+
+  - name: docker
+    image: plugins/docker
+    settings: 
+      username: 
+        from_secret: DOCKER_USERNAME
+      password:
+        from_secret: DOCKER_PASSWORD
+      repo: phoenixza/zags
+      tags: latest
+    when:
+      branch:
+        - master
+  
+  - name: notify
+    image: appleboy/drone-discord
+    settings: 
+      webhook_id: 
+        from_secret: DISCORD_WEBHOOK_ID
+      webhook_token:
+        from_secret: DISCORD_WEBHOOK_TOKEN

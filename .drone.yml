@@ -8,10 +8,14 @@ platform:
 steps:
   - name: tests
     image: python:3.7
+    environment:
+      STEAM_USERNAME:
+        from_secret: STEAM_USERNAME
     commands:
       - pip install pipenv
       - pipenv install --dev --ignore-pipfile
       - pipenv run pytest
+      - echo $STEAM_USERNAME
 
   - name: docker
     image: plugins/docker

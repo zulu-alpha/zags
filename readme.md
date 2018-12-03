@@ -1,5 +1,7 @@
 # Zulu-Alpha Game Server
 
+[![Build Status](https://cloud.drone.io/api/badges/zulu-alpha/zags/status.svg)](https://cloud.drone.io/zulu-alpha/zags)
+
 An ephemeral, short lived Arma 3 server that can be quickly run anywhere in the world with mods and easy configuration via environmental variables.
 Designed to work with [ZAMD](https://github.com/zulu-alpha/zamd).
 This is developed to be run in an **Azure Container Service**.

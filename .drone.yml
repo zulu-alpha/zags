@@ -15,6 +15,11 @@ steps:
 
   - name: docker
     image: plugins/docker
+    environment:
+      STEAM_USERNAME:
+        from_secret: STEAM_USERNAME
+      STEAM_PASSWORD:
+        from_secret: STEAM_PASSWORD
     settings: 
       username: 
         from_secret: DOCKER_USERNAME
@@ -22,6 +27,9 @@ steps:
         from_secret: DOCKER_PASSWORD
       repo: phoenixza/zags
       tags: latest
+      build_args:
+        - STEAM_USERNAME=$STEAM_USERNAME
+        - STEAM_PASSWORD=$STEAM_PASSWORD
     when:
       branch:
         - master

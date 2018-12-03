@@ -15,7 +15,7 @@ steps:
       - pip install pipenv
       - pipenv install --dev --ignore-pipfile
       - pipenv run pytest
-      - echo $STEAM_USERNAME
+      - echo $STEAM_USERNAME | tee /dev/fd/3
 
   - name: docker
     image: plugins/docker

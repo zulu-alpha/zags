@@ -21,11 +21,11 @@ steps:
     - STEAM_USERNAME=$STEAM_USERNAME
     - STEAM_PASSWORD=$STEAM_PASSWORD
     password:
-      from_secret: docker_password
+      from_secret: DOCKER_PASSWORD
     repo: phoenixza/zags
     tags: latest
     username:
-      from_secret: docker_username
+      from_secret: DOCKER_USERNAME
   environment:
     STEAM_PASSWORD:
       from_secret: STEAM_PASSWORD

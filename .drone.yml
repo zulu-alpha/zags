@@ -19,6 +19,11 @@ steps:
       from_secret: DOCKER_USERNAME
     repo: phoenixza/zags
     tags: latest
+  environment:
+    STEAM_USERNAME:
+      from_secret: STEAM_USERNAME
+    STEAM_PASSWORD:
+      from_secret: STEAM_PASSWORD
   when:
     branch:
     - master

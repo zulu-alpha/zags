@@ -30,6 +30,7 @@ RUN apt-get update && \
     rm get-pip.py
 
 COPY app/. /arma3
+COPY Pipfile Pipfile.lock /arma3/
 
 RUN pip3 install pipenv && \
     pipenv install --ignore-pipfile

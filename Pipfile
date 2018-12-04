@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 "jinja2" = "*"
-requests = "*"
 
 [dev-packages]
 pylint = "*"

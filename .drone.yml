@@ -12,10 +12,10 @@ steps:
       STEAM_USERNAME:
         from_secret: STEAM_USERNAME
     commands:
+      - echo Test
       - pip install pipenv
       - pipenv install --dev --ignore-pipfile
       - pipenv run pytest
-      - echo $STEAM_USERNAME | tee /dev/fd/3
 
   - name: docker
     image: plugins/docker

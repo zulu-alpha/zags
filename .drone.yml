@@ -12,7 +12,7 @@ steps:
       STEAM_USERNAME:
         from_secret: STEAM_USERNAME
     commands:
-      - echo Test
+      - echo $STEAM_USERNAME
       - pip install pipenv
       - pipenv install --dev --ignore-pipfile
       - pipenv run pytest

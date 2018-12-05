@@ -100,6 +100,7 @@ def render_server_cfg(path_config):
     with open(path_config, 'w') as open_file:
         rendered = template_cfg.render(**parameters)
         open_file.write(rendered)
+        print(f'Written server config to {path_config}')
 
 def render_basic_cfg(path_basic):
     """Render basic.cfg
@@ -131,6 +132,7 @@ def render_basic_cfg(path_basic):
     with open(path_basic, 'w') as open_file:
         rendered = template_cfg.render(**parameters)
         open_file.write(rendered)
+        print(f'Written basic config to {path_basic}')
 
 def render_armaprofile(path_profile):
     """Render basic.cfg
@@ -179,3 +181,4 @@ def render_armaprofile(path_profile):
     with open(path_profile, 'w') as open_file:
         rendered = template_cfg.render(**parameters)
         open_file.write(rendered)
+        print(f'Written profile to {path_profile}')

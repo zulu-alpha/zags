@@ -1,103 +1,25 @@
 """All tests that are available are in here"""
 import os
+import json
 import pytest
 
 
+MAP_PATH = os.path.join(os.path.dirname(__file__), 'envar_mapping.json')
+with open(MAP_PATH, 'r') as open_file:
+    MAP_DICT = json.loads(open_file.read())
 PATH_CONFIG = 'server.cfg'
 PATH_BASIC = 'basic.cfg'
 PATH_PROFILE = 'server.armaprofile'
 
-CONFIG_STRING_VARIABLES = {
-    'CONFIG_PASSWORD_ADMIN': 'passwordAdmin',
-    'CONFIG_PASSWORD': 'password',
-    'CONFIG_SERVER_COMMAND_PASSWORD': 'serverCommandPassword',
-    'CONFIG_HOSTNAME': 'hostname',
-    'CONFIG_LOG_FILE': 'logFile',
-    'CONFIG_DOUBLE_ID_DETECTED': 'doubleIdDetected',
-    'CONFIG_ON_USER_CONNECTED': 'onUserConnected',
-    'CONFIG_ON_USER_DISCONNECTED': 'onUserDisconnected',
-    'CONFIG_ON_HACKED_DATA': 'onHackedData',
-    'CONFIG_ON_DIFFERENT_DATA': 'onDifferentData',
-    'CONFIG_ON_UNSIGNED_DATA': 'onUnsignedData',
-    'CONFIG_REGULAR_CHECK': 'regularCheck',
-    'CONFIG_TIME_STAMP_FORMAT': 'timeStampFormat',
-    'CONFIG_FORCED_DIFFICULTY': 'forcedDifficulty'
-}
-CONFIG_BOOL_INT_VARIABLES = {
-    'CONFIG_MAX_PLAYERS': 'maxPlayers',
-    'CONFIG_VOTE_THRESHOLD': 'voteThreshold',
-    'CONFIG_VOTE_MISSION_PLAYERS': 'voteMissionPlayers',
-    'CONFIG_KICK_DUPLICATE': 'kickduplicate',
-    'CONFIG_UPNP': 'upnp',
-    'CONFIG_ALLOWED_FILE_PATCHING': 'allowedFilePatching',
-    'CONFIG_DISCONNECT_TIMEOUT': 'disconnectTimeout',
-    'CONFIG_MAX_DESYNC': 'maxdesync',
-    'CONFIG_MAX_PING': 'maxping',
-    'CONFIG_MAX_PACKETLOSS': 'maxpacketloss',
-    'CONFIG_VERIFY_SIGNATURES': 'verifySignatures',
-    'CONFIG_DRAWING_IN_MAP': 'drawingInMap',
-    'CONFIG_DISABLE_VON': 'disableVoN',
-    'CONFIG_VON_CODEC_QUALITY': 'vonCodecQuality',
-    'CONFIG_VON_CODEC': 'vonCodec',
-    'CONFIG_BATTLEYE': 'BattlEye',
-    'CONFIG_BATTLEYE_LICENSE': 'battleyeLicense',
-    'CONFIG_FORCE_ROTORLIB_SIMULATION': 'forceRotorLibSimulation',
-    'CONFIG_PERSISTENT': 'persistent',
-    'CONFIG_REQUIRED_BUILD': 'requiredBuild'
-}
-CONFIG_STRING_ARRAY_VARIABLES = {
-    'CONFIG_MOTD': 'motd',
-    'CONFIG_ADMINS': 'admins',
-    'CONFIG_HEADLESS_CLIENTS': 'headlessClients',
-    'CONFIG_LOCAL_CLIENTS': 'localClient',
-    'CONFIG_MISSION_WHITELIST': 'missionWhitelist'
-}
-CONFIG_NUMBER_OR_BOOL_ARRAY_VARIABLES = {
-    'CONFIG_KICK_CLIENTS_ON_SLOW_NETWORK': 'kickClientsOnSlowNetwork'
-}
-BASIC_INT_VARIABLES = {
-    'BASIC_MAX_MSG_SEND': 'MaxMsgSend',
-    'BASIC_SIZE_GUARANTEED': 'MaxSizeGuaranteed',
-    'BASIC_MAX_SIZE_NONGUARANTEED': 'MaxSizeNonguaranteed',
-    'BASIC_MIN_BANDWIDTH': 'MinBandwidth',
-    'BASIC_MAX_BANDWIDTH': 'MaxBandwidth',
-    'BASIC_MIN_ERROR_TO_SEND': 'MinErrorToSend',
-    'BASIC_MIN_ERROR_TO_SEND_NEAR': 'MinErrorToSendNear',
-    'BASIC_MAX_CUSTOM_FILE_SIZE': 'MaxCustomFileSize'
-}
-BASIC_CLASS_INT_VARIABLES = {
-    'BASIC_MAX_PACKET_SIZE': 'maxPacketSize'
-}
-PROFILE_OPTIONS_VARIABLES = {
-    'PROFILE_REDUCED_DAMAGE': 'reducedDamage',
-    'PROFILE_GROUP_INDICATORS': 'groupIndicators',
-    'PROFILE_FRIENDLY_TAGS': 'friendlyTags',
-    'PROFILE_ENEMY_TAGS': 'enemyTags',
-    'PROFILE_DETECTED_MINES': 'detectedMines',
-    'PROFILE_COMMANDS': 'commands',
-    'PROFILE_WAYPOINTS': 'waypoints',
-    'PROFILE_TACTICAL_PING': 'tacticalPing',
-    'PROFILE_WEAPON_INFO': 'weaponInfo',
-    'PROFILE_STANCE_INDICATOR': 'stanceIndicator',
-    'PROFILE_STAMINA_BAR': 'staminaBar',
-    'PROFILE_WEAPON_CROSSHAIR': 'weaponCrosshair',
-    'PROFILE_VISION_AID': 'visionAid',
-    'PROFILE_THIRD_PERSON_VIEW': 'thirdPersonView',
-    'PROFILE_CAMERA_SHAKE': 'cameraShake',
-    'PROFILE_SCORE_TABLE': 'scoreTable',
-    'PROFILE_DEATH_MESSAGE': 'deathMessages',
-    'PROFILE_VON_ID': 'vonID',
-    'PROFILE_MAP_CONTENT': 'mapContent',
-    'PROFILE_AUTO_REPORT': 'autoReport',
-    'PROFILE_MULTIPLE_SAVES': 'multipleSaves'
-}
-PROFILE_VARIABLES = {
-    'PROFILE_AI_LEVEL_PRESET': 'aiLevelPreset'
-}
-PROFILES_CUSTOM_AI_LEVEL = {
-    'PROFILE_CUSTOM_AI_LEVEL_SKILL_AI': 'skillAI',
-    'PROFILE_CUSTOM_AI_LEVEL_PRECISION_AI': 'precisionAI'
-}
+CONFIG_STRING_VARIABLES = MAP_DICT['config']['string_variables']
+CONFIG_BOOL_INT_VARIABLES = MAP_DICT['config']['bool_int_variables']
+CONFIG_STRING_ARRAY_VARIABLES = MAP_DICT['config']['string_array_variables']
+CONFIG_NUMBER_OR_BOOL_ARRAY_VARIABLES = MAP_DICT['config']['number_bool_array_variables']
+BASIC_INT_VARIABLES = MAP_DICT['basic']['int_variables']
+BASIC_CLASS_INT_VARIABLES = MAP_DICT['basic']['class_int_variable']
+PROFILE_OPTIONS_VARIABLES = MAP_DICT['profile']['option_variables']
+PROFILE_VARIABLES = MAP_DICT['profile']['custom_difficulty_variables']
+PROFILES_CUSTOM_AI_LEVEL = MAP_DICT['profile']['custom_ai_level_variables']
 
 def test_config_single_variables(tmp_path):
     """Tests that each single (non array) variable is written correctly to the config file"""

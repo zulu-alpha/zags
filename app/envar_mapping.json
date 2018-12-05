@@ -1,0 +1,105 @@
+{
+    "config": {
+        "string_variables": {
+            "CONFIG_PASSWORD_ADMIN": "passwordAdmin",
+            "CONFIG_PASSWORD": "password",
+            "CONFIG_SERVER_COMMAND_PASSWORD": "serverCommandPassword",
+            "CONFIG_HOSTNAME": "hostname",
+            "CONFIG_LOG_FILE": "logFile",
+            "CONFIG_DOUBLE_ID_DETECTED": "doubleIdDetected",
+            "CONFIG_ON_USER_CONNECTED": "onUserConnected",
+            "CONFIG_ON_USER_DISCONNECTED": "onUserDisconnected",
+            "CONFIG_ON_HACKED_DATA": "onHackedData",
+            "CONFIG_ON_DIFFERENT_DATA": "onDifferentData",
+            "CONFIG_ON_UNSIGNED_DATA": "onUnsignedData",
+            "CONFIG_REGULAR_CHECK": "regularCheck",
+            "CONFIG_TIME_STAMP_FORMAT": "timeStampFormat",
+            "CONFIG_FORCED_DIFFICULTY": "forcedDifficulty"
+        },
+        "bool_int_variables": {
+            "CONFIG_MAX_PLAYERS": "maxPlayers",
+            "CONFIG_VOTE_THRESHOLD": "voteThreshold",
+            "CONFIG_VOTE_MISSION_PLAYERS": "voteMissionPlayers",
+            "CONFIG_KICK_DUPLICATE": "kickduplicate",
+            "CONFIG_UPNP": "upnp",
+            "CONFIG_ALLOWED_FILE_PATCHING": "allowedFilePatching",
+            "CONFIG_DISCONNECT_TIMEOUT": "disconnectTimeout",
+            "CONFIG_MAX_DESYNC": "maxdesync",
+            "CONFIG_MAX_PING": "maxping",
+            "CONFIG_MAX_PACKETLOSS": "maxpacketloss",
+            "CONFIG_VERIFY_SIGNATURES": "verifySignatures",
+            "CONFIG_DRAWING_IN_MAP": "drawingInMap",
+            "CONFIG_DISABLE_VON": "disableVoN",
+            "CONFIG_VON_CODEC_QUALITY": "vonCodecQuality",
+            "CONFIG_VON_CODEC": "vonCodec",
+            "CONFIG_BATTLEYE": "BattlEye",
+            "CONFIG_BATTLEYE_LICENSE": "battleyeLicense",
+            "CONFIG_FORCE_ROTORLIB_SIMULATION": "forceRotorLibSimulation",
+            "CONFIG_PERSISTENT": "persistent",
+            "CONFIG_REQUIRED_BUILD": "requiredBuild"
+        },
+        "string_array_variables": {
+            "CONFIG_MOTD": "motd",
+            "CONFIG_ADMINS": "admins",
+            "CONFIG_HEADLESS_CLIENTS": "headlessClients",
+            "CONFIG_LOCAL_CLIENTS": "localClient",
+            "CONFIG_MISSION_WHITELIST": "missionWhitelist"
+        },
+        "number_bool_array_variables": {
+            "CONFIG_KICK_CLIENTS_ON_SLOW_NETWORK": "kickClientsOnSlowNetwork"
+        },
+        "mission_rotation_variables": {
+            "CONFIG_MISSION_ROTATION_CLASSNAMES": "mission_classnames",
+            "CONFIG_MISSION_ROTATION_NAMES": "mission_names",
+            "CONFIG_MISSION_ROTATION_DIFFICULTIES": "mission_difficulties",
+            "CONFIG_MISSION_ROTATION_PARAMS": "mission_parameters"
+        }
+    },
+    "basic": {
+        "int_variables": {
+            "BASIC_MAX_MSG_SEND": "MaxMsgSend",
+            "BASIC_SIZE_GUARANTEED": "MaxSizeGuaranteed",
+            "BASIC_MAX_SIZE_NONGUARANTEED": "MaxSizeNonguaranteed",
+            "BASIC_MIN_BANDWIDTH": "MinBandwidth",
+            "BASIC_MAX_BANDWIDTH": "MaxBandwidth",
+            "BASIC_MIN_ERROR_TO_SEND": "MinErrorToSend",
+            "BASIC_MIN_ERROR_TO_SEND_NEAR": "MinErrorToSendNear",
+            "BASIC_MAX_CUSTOM_FILE_SIZE": "MaxCustomFileSize"
+        },
+        "class_int_variable": {
+            "BASIC_MAX_PACKET_SIZE": "maxPacketSize"
+        }
+    },
+    "profile": {
+        "option_variables": {
+            "PROFILE_REDUCED_DAMAGE": "reducedDamage",
+            "PROFILE_GROUP_INDICATORS": "groupIndicators",
+            "PROFILE_FRIENDLY_TAGS": "friendlyTags",
+            "PROFILE_ENEMY_TAGS": "enemyTags",
+            "PROFILE_DETECTED_MINES": "detectedMines",
+            "PROFILE_COMMANDS": "commands",
+            "PROFILE_WAYPOINTS": "waypoints",
+            "PROFILE_TACTICAL_PING": "tacticalPing",
+            "PROFILE_WEAPON_INFO": "weaponInfo",
+            "PROFILE_STANCE_INDICATOR": "stanceIndicator",
+            "PROFILE_STAMINA_BAR": "staminaBar",
+            "PROFILE_WEAPON_CROSSHAIR": "weaponCrosshair",
+            "PROFILE_VISION_AID": "visionAid",
+            "PROFILE_THIRD_PERSON_VIEW": "thirdPersonView",
+            "PROFILE_CAMERA_SHAKE": "cameraShake",
+            "PROFILE_SCORE_TABLE": "scoreTable",
+            "PROFILE_DEATH_MESSAGE": "deathMessages",
+            "PROFILE_VON_ID": "vonID",
+            "PROFILE_MAP_CONTENT": "mapContent",
+            "PROFILE_AUTO_REPORT": "autoReport",
+            "PROFILE_MULTIPLE_SAVES": "multipleSaves"
+        },
+        "custom_difficulty_variables": {
+            "PROFILE_AI_LEVEL_PRESET": "aiLevelPreset"
+        },
+        "custom_ai_level_variables": {
+            "PROFILE_CUSTOM_AI_LEVEL_SKILL_AI": "skillAI",
+            "PROFILE_CUSTOM_AI_LEVEL_PRECISION_AI": "precisionAI"
+        }
+    }
+}

@@ -229,3 +229,14 @@ def test_mission(tmp_path):
     os.environ['CONFIG_MISSION_ROTATION_DIFFICULTIES'] = 'Custom'
     with pytest.raises(AssertionError):
         render_server_cfg(tmp_path / PATH_CONFIG)
+
+def test_log_filename():
+    """Test that a valid logfile name is used"""
+    from log_name import make_log_filename
+    import datetime
+
+    os.environ['CONFIG_HOSTNAME'] = 'Test Server - Pytest'
+    timestamp = datetime.datetime.utcnow().isoformat()
+    correct_filename = f'/arma3/logs/[Test Server - Pytest]__{timestamp}.log'
+
+    assert make_log_filename() == correct_filename

@@ -41,7 +41,8 @@ RUN rm -R keys && \
     mkdir keys && \
     mkdir mods && \
     mkdir mpmissions && \
-    mkdir -p "/root/.local/share/Arma 3 - Other Profiles/server"
+    mkdir -p "/root/.local/share/Arma 3 - Other Profiles/server" && \
+    mkdir logs
 
 EXPOSE 2302/udp
 EXPOSE 2303/udp
@@ -49,4 +50,4 @@ EXPOSE 2304/udp
 EXPOSE 2305/udp
 EXPOSE 2306/udp
 
-ENTRYPOINT ["pipenv", "run", "python3", "run.py"]
+ENTRYPOINT ["pipenv", "run", "python3", "run.py", "2>&1", "|", "tee", "-a", '"`python3.7 log_name.py`"']

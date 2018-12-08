@@ -1,12 +1,12 @@
+"""Start arma 3 server and prepare environment for it."""
 import os
-import sys
 import json
 from subprocess import run
 from pathlib import Path
 from configuration import render_server_cfg, render_basic_cfg, render_armaprofile
 
 
-PATH_MODS = 'mods'
+PATH_MODS = 'mods'  # Relative to game server binary.
 PATH_MODLINES = '/arma3/mods/modlines.json'
 PATH_SERVER_CFG = '/arma3/server.cfg'
 PATH_BASIC_CFG = '/arma3/basic.cfg'

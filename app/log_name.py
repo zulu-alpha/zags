@@ -8,7 +8,7 @@ PATH_LOG = '/arma3/logs'
 def make_log_filename():
     """Generates unique and readable filename for the log file"""
     hostname = os.getenv('CONFIG_HOSTNAME')
-    timestamp = datetime.datetime.utcnow().isoformat()
+    timestamp = datetime.datetime.utcnow().replace(microsecond=0).isoformat()
     return f'{PATH_LOG}/[{hostname}]__{timestamp}.log'
 
 if __name__ == '__main__':

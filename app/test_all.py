@@ -236,7 +236,7 @@ def test_log_filename():
     import datetime
 
     os.environ['CONFIG_HOSTNAME'] = 'Test Server - Pytest'
-    timestamp = datetime.datetime.utcnow().isoformat()
+    timestamp = datetime.datetime.utcnow().replace(microsecond=0).isoformat()
     correct_filename = f'/arma3/logs/[Test Server - Pytest]__{timestamp}.log'
 
     assert make_log_filename() == correct_filename

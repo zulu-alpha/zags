@@ -24,7 +24,7 @@ def launch(executable_path, mod_line, arguments, kw_arguments):
     print(f'Using mod line {mod_line}: {modlines[mod_line]}')
     for mod_dir in modlines[mod_line]:
         run_params.append(f'-mod={str(Path(PATH_MODS) / mod_dir)}')
-    print(f'Launching with params {run_params}')
+    print(f'Launching with params {run_params}') # Relative to game server binary.
     run(run_params)
 
 if __name__ == '__main__':
